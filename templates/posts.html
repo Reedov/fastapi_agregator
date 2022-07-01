@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Item Details</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+
+<style>
+        a {color: #0b2911; }
+        a:link { text-decoration: none; }
+        .post-header {
+        background-color: #9d9981;
+    }
+</style>
+<body>
+    <h1>{{page}}</h1>
+    {% for post in posts %}
+    <div>
+        <div class="post-header">
+            <span>{{post.posted_at}}</span> <span style="color:blue;font-weight:bold">{{post.source_name}} </span><span>{{ post.title }}</span>
+        </div>
+        <a href="{{post.url}}"><div>{{post.content}}</div></a>
+    </div>
+    {% endfor %}
+</body>
+</html>
