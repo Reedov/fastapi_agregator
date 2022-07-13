@@ -80,6 +80,14 @@ class Post(Base):
     created_at = Column(TIMESTAMP, default=func.now())
 
 
+class RequestsLog(Base):
+    __tablename__ = 'requests_log'
+    id = Column(Integer, primary_key=True)
+    requested_at = Column(TIMESTAMP, default=func.now())
+    client_host = Column(String)
+    url = Column(String)
+
+
 # class Icon(Base):
 #     __tablename__ = 'icon'
 #     id = Column(Integer, primary_key=True)

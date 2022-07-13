@@ -57,3 +57,11 @@ CREATE TABLE posts (
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(source_id, title)
 );
+
+-- таблица логгирования запросов --
+CREATE TABLE requests_log(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    requested_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    client_host TEXT,
+    url TEXT
+);
