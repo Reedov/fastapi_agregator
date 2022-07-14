@@ -101,6 +101,10 @@ class PostOut(PostBase):
         orm_mode = True
 
 
+class PostFilters(BaseModel):
+    source_id: int = Field(None, description='ИД источника')
+
+
 class UserBase(BaseModel):
     username: str = Field(...)
     email: str = Field(...)
