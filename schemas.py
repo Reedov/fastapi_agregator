@@ -79,19 +79,23 @@ class SourceGetIn(BaseModel):
     get_at: datetime = Field(..., description='время посещения')
 
 
-class PostIn(BaseModel):
-    """ схема Post на вход """
+class PostBase(BaseModel):
     posted_at: datetime = Field(..., description='Дата-Время поста')
     title: str = Field(..., description='Название')
     content: str = Field(None, description='Содержимое поста')
     url: str = Field(None, description='Ссылка на пост')
     img_url: str = Field(None, description='Ссылка на картинку поста')
+
+
+class PostIn(PostBase):
+    """ схема Post на вход """
     source_id: int = Field(None, description='ИД источника')
 
 
-class PostOut(PostIn):
+class PostOut(PostBase):
     """ схема Post на выход """
     id: int = Field(..., description='id поста')
+    source_name: str = Field(..., description='название источника')
 
     class Config:
         orm_mode = True

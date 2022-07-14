@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from models.models_orm import Post, Source
+from models.models_orm import Post, Source, Subscribes
 from models.database import get_session
 from schemas import PostOut, PostIn
 
@@ -38,6 +38,7 @@ class PostService:
                                     Post.img_url,
                                     Source.name.label('source_name'))
                  .join(Source, Post.source_id == Source.id)
+                 .join(Subscribes, Post.source_id == Subscribes.source_id)
                  .order_by(Post.posted_at.desc()))
         if filters:
             query = query.filter_by(**filters)
