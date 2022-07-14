@@ -37,11 +37,12 @@ class PostService:
                                     Post.content,
                                     Post.img_url,
                                     Source.name.label('source_name'))
-                 .join(Source, Post.source_id == Source.id)
                  .join(Subscribes, Post.source_id == Subscribes.source_id)
+                 .join(Source, Subscribes.source_id == Source.id)
+                 .filter(Subscribes.user_id == filters.pop('user_id'))
                  .order_by(Post.posted_at.desc()))
         if filters:
-            query = query.filter_by(**filters)
+            query = query.filter(**filters)
         return query.all()
 
     def update(self, post_id: int, post_data: PostIn):

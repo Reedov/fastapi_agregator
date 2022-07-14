@@ -13,9 +13,9 @@ def get_posts(source_id: int = None,
               user: UserOut = Depends(get_current_user),
               service: PostService = Depends()
               ):
-    filters = {}
+    filters = {'user_id': user.id}
     if source_id:
-        filters.update({'source_id': source_id, 'user_id': user.id})
+        filters.update({'source_id': source_id})
     return paginate(service.get_all(filters=filters))
 
 
